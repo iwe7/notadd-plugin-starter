@@ -16,8 +16,7 @@ module.exports = function (env, argv) {
   return {
     mode: env.production ? 'production' : 'development',
     entry: {
-      app: "./src/main.ts",
-      polyfills: "./src/polyfills.ts"
+      app: "./src/app/plugin-demo/plugin-demo.module.ts"
     },
     target: "web",
     output: {
@@ -61,15 +60,6 @@ module.exports = function (env, argv) {
       new MiniCssExtractPlugin({
         filename: "app.css"
       }),
-      new CopyWebpackPlugin([{
-          from: getRoot("src", "index.html"),
-          to: getRoot("dist", "index.html")
-        },
-        {
-          from: getRoot("src", "assets"),
-          to: getRoot("dist", "assets")
-        }
-      ]),
       new webpack.DllReferencePlugin({
         context: __dirname,
         manifest: require("./src/assets/libs/rxjs.manifest.json"),
